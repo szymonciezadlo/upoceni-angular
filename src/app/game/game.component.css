@@ -1,0 +1,56 @@
+.game-element {
+  padding: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 800px;
+}
+
+.card-columns {
+  column-count: 5;
+}
+
+.player-name {
+  text-align: center;
+  padding: 25px 0;
+}
+
+.card {
+  display: inline-block;
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+}
+
+.players-list {
+  margin-top: 30px;
+  max-height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: auto;
+  /* -webkit-overflow-scrolling: touch; */
+  justify-content: center;
+}
+
+.deleteButton {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  
+}
+
+.deleteMinus{
+  /* text-align: center;
+  align-items: center;
+  justify-content: center; */
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

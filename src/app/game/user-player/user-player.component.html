@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col">
+    <div
+      class="card user-card justify-content-center align-items-center"
+      [ngClass]="getStylePlayer(userPlayer?.status)"
+    >
+      <h2 class="card-text">
+        {{ userPlayer?.playerName }}
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="row buttons">
+  <div class="col-2">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="onDecisionClick(true)"
+    >
+      APPROVE
+    </button>
+  </div>
+  <div class="col-2">
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="onDecisionClick(false)"
+    >
+      DECLINE
+    </button>
+  </div>
+</div>

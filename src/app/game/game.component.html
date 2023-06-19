@@ -1,0 +1,26 @@
+<div class="game-element">
+  <div class="container">
+    <app-game-info></app-game-info>
+    <div class="row offset-3 players-list">
+      <div class="col">
+        <div class="card-columns">
+          <div class="card" *ngFor="let player of players"
+          [ngClass]="getStylePlayer(player.status)">
+            <p class="player-name">{{player.playerName}}</p>
+            <button type="button" class="deleteButton btn btn-danger " (click)="deleteUser(player)"><p class="deleteMinus">-</p></button>
+          </div>
+        </div>
+        <!-- <li class="list-group">
+          <ul
+            *ngFor="let player of players"
+            role="listitem"
+            [ngClass]="getStylePlayer(player.status)"
+          >{{player.name}}</ul>
+        </li> -->
+      </div>
+    </div>
+    <app-add-player></app-add-player>
+  
+    <app-user-player [getStylePlayer]="getStylePlayer"></app-user-player>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="row container">
+    <div class="col">
+        <form #usernameForm="ngForm" (ngSubmit)="onSubmit(usernameForm)">
+            <div class="row">
+                <label for="username">Username</label>
+                <div class="form-group col-10">
+                    <input type="text" id="username" class="form-control" (blur)="changeIsTyping(false)" (focus)="changeIsTyping(true)" (ngModelChange)="onInputChange(inputUsername.value)" ngModel name="username" [value]="chosenUser?.username" #inputUsername>
+                </div>
+                <button type="submit" class="col-2 add-button btn btn-success" [disabled]="usernameForm.invalid">Add</button>
+            </div>
+            <div class="suggest-container" *ngIf="isTyping">
+                <div class="list-group" *ngFor="let user of users">
+                    <div class="row">
+                        <button type="button" class="col suggest-button list-group-item list-group-item-action"  (click)="chooseUser(user, usernameForm)">{{user.username}}</button>
+                    </div>
+                  </div>
+            </div>
+            <div class="" ></div>
+        </form>
+    </div>
+</div>
