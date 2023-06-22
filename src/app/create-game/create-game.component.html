@@ -1,19 +1,19 @@
 <div class="createGameContainer">
   <form #gameForm="ngForm" (ngSubmit)="onSubmit(gameForm)">
     <div class="container">
-      <div class="form-group ">
+      <div class="form-group">
         <label for="inputDate" class="col-form-label">Date</label>
-          <input
-            type="date"
-            class="form-control"
-            id="inputDate"
-            [(ngModel)]="date"
-            ngModel
-            required
-            name="date"
-          />
+        <input
+          type="date"
+          class="form-control"
+          id="inputDate"
+          [(ngModel)]="date"
+          ngModel
+          required
+          name="date"
+        />
       </div>
-      <div class="form-group ">
+      <div class="form-group">
         <label for="place" class="col-form-label">Place</label>
         <input
           type="text"
@@ -24,7 +24,7 @@
           name="place"
         />
       </div>
-      <div class="form-group ">
+      <div class="form-group">
         <label for="maxPlayers" class="col-form-label"
           >MaxPlayers: {{ gameForm.form.value.maxPlayers }}</label
         >
@@ -38,7 +38,7 @@
           name="maxPlayers"
           required
         />
-        <div class="form-group ">
+        <div class="form-group">
           <label for="minPlayers" class="col-form-label"
             >MinPlayers: {{ gameForm.form.value.minPlayers }}</label
           >
@@ -52,7 +52,7 @@
             name="minPlayers"
           />
         </div>
-        <div class="form-group ">
+        <div class="form-group">
           <label for="durationMin" class="col-form-label"
             >DurationMin: {{ gameForm.form.value.durationMin }}</label
           >
@@ -67,7 +67,7 @@
             name="durationMin"
           />
         </div>
-        <div class="form-group ">
+        <div class="form-group">
           <label for="cost" class="col-form-label"
             >Cost: {{ gameForm.form.value.cost }}</label
           >
@@ -82,6 +82,20 @@
           />
         </div>
       </div>
+      <ul class="list-group list-group-flush">
+        <li
+          class="list-group-item list-group-item-primary"
+          *ngFor="let user of players"
+        >
+          <div class="player-container">
+            <div class="player-username">{{ user.username }}</div>
+            <button class="player-delete btn btn-danger">-</button>
+          </div>
+        </li>
+      </ul>
+      <app-add-player
+        (newUserEmitter)="addUserToPlayers($event)"
+      ></app-add-player>
     </div>
     <button type="submit" [disabled]="!gameForm.valid" class="btn btn-primary">
       Submit

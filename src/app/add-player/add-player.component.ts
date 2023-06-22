@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { timeout } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { GameService } from 'src/app/services/game.service';
+import { PlayerDTO } from '../models/playerDTO.model';
 
 @Component({
   selector: 'app-add-player',
@@ -14,20 +15,19 @@ export class AddPlayerComponent implements OnInit {
   users: User []= [  ] 
   chosenUser?: User;
   isTyping: boolean = false;
-  gameId: number;
+  @Input() gameId?: number;
+  @Output() newUserEmitter = new EventEmitter<User>();
 
-  constructor(private gameService: GameService, private route: ActivatedRoute) { 
-    this.gameId = this.route.snapshot.params['gameId']
-  }
+  constructor(private gameService: GameService) { }
 
   ngOnInit() {
     this.gameService.fetchSuggestedUsers('', this.gameId).subscribe(users => this.users = users);
    }
   
   onSubmit(usernameForm: NgForm) {
-    console.log()
     if (this.chosenUser) {
-      this.gameService.addUserToGame(this.chosenUser, this.gameId);
+      this.newUserEmitter.emit(this.chosenUser);
+      this.chosenUser = undefined;
     }
   }
 

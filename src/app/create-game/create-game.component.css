@@ -4,3 +4,18 @@
     padding-right: 30%;
     padding-top: 100px;
 }
+
+.player-container{
+    display: grid ;
+    /* grid-template-columns: 50px 50px 50px 50px; */
+    grid-template-areas: "main main . sidebar";
+}
+.player-username{
+    grid-area: main;
+    align-self: center;
+}
+.player-delete{
+    grid-area: sidebar;
+    width: 70px;
+    justify-self: right;
+}

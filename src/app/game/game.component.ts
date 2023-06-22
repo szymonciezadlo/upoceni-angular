@@ -1,16 +1,13 @@
 import {
   Component,
-  EventEmitter,
   OnDestroy,
   OnInit,
-  Output,
 } from '@angular/core';
 import { PlayerDTO } from '../models/playerDTO.model';
-import { PlayerService } from '../services/player.service';
 import { GameService } from '../services/game.service';
-import { GameDTO } from '../models/gameDTO.model';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-game',
@@ -46,16 +43,28 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   getStylePlayer(status: string) {
+    let style = {
+      'color': '#fefdfa',
+      'background-color': '#534a32'
+    };
     switch (status) {
       case 'APPROVED':
-        return 'list-group-item list-group-item-success';
+        style['background-color'] = '#00a870';
+        break;
       case 'NOT_APPROVED':
-        return 'list-group-item list-group-item-warning';
+        style['background-color'] = '#f3c13a';
+        break;
       case 'DECLINED':
-        return 'list-group-item list-group-item-danger';
+        style['background-color'] = '#972715';
+        break;
       default:
-        return 'list-group-item list-group-item-dark';
+        style['background-color'] = '#FFA630';
     }
+    return style;
+  }
+
+  addUserToGame(user: User) {
+    this.gameService.addUserToGame(user, this.gameId);
   }
 
   deleteUser(player: PlayerDTO) {

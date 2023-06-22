@@ -29,11 +29,11 @@
     </tr>
   </tbody>
 </table> -->
-<div class="container calendar-component-container">
+<div class="container">
   <div class="row">
-    <div class="col-1 arrow arrow-right"><-</div>
-  </div>
-  <div class="col-md-10">
+    <div class="col-1"><-</div>
+    
+    <div class="col-10">
     <div class="container calendar-container">
       <div class="row rowTitle">
         <div class="col daysTitle">Monday</div>
@@ -45,40 +45,45 @@
         <div class="col daysTitle">Sunday</div>
       </div>
 
-      <div class="row" *ngFor="let week of getWeeks()">
-        <div class="col-lg col-md-12" *ngFor="let day of [0, 1, 2, 3, 4, 5, 6]">
-          <div class="card">
-            <div
-              class="card-body"
-              type="button"
-              [routerLink]="[
-                '/game/create',
-                getDateInWeek(week, day),
-                chosenDate.getMonth(),
-                chosenDate.getFullYear()
-              ]"
-            >
-              <div class="card-text">
-                <h4 class="dayNumber">
-                  {{ getDateInWeek(week, day) }}
-                </h4>
-                <div class="list-group overflow-auto">
-                  <a
-                    type="button"
-                    class="game-text list-group-item list-group-item-action"
-                    *ngFor="let game of getGamesIfExist(week, day)"
-                    (click)="goToGame(game.id)"
-                    [ngClass]="getGameStyle(game.status)"
-                  >
-                    {{ game.description }}
-                  </a>
+        <div class="row" *ngFor="let week of getWeeks()">
+          <div
+            class="col-lg col-md-12"
+            *ngFor="let day of [0, 1, 2, 3, 4, 5, 6]"
+          >
+            <div class="card">
+              <div
+                class="card-body"
+                type="button"
+                [routerLink]="[
+                  '/game/create',
+                  getDateInWeek(week, day),
+                  chosenDate.getMonth(),
+                  chosenDate.getFullYear()
+                ]"
+              >
+                <div class="card-text">
+                  <h4 class="dayNumber">
+                    {{ getDateInWeek(week, day) }}
+                  </h4>
+                  <div class="list-group overflow-auto">
+                    <a
+                      type="button"
+                      class="game-text list-group-item list-group-item-action"
+                      *ngFor="let game of getGamesIfExist(week, day)"
+                      (click)="goToGame(game.id)"
+                      [ngClass]="getGameStyle(game.status)"
+                    >
+                      {{ game.description }}
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-1 arrow arrow-right">-></div>
+
+      <div class="col-1">-></div>
     </div>
   </div>
 </div>

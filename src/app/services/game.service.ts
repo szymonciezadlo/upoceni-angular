@@ -35,12 +35,15 @@ export class GameService {
       );
   }
 
-  fetchSuggestedUsers(username: string, gameId: number) {
+  fetchSuggestedUsers(username: string, gameId: number | undefined) {
+    let params = new HttpParams()
+      .append('username', username);
+    if (gameId) {
+      params = params.append('gameId', gameId);
+    }
     return this.http
       .get<User[]>('http://localhost:8080/user/suggested', {
-        params: new HttpParams()
-          .append('username', username)
-          .append('gameId', gameId),
+        params: params,
         withCredentials: true,
       })
       .pipe(catchError(this.handleError));

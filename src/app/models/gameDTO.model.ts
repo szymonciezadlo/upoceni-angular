@@ -15,6 +15,6 @@ export interface GameDTO {
     groupId: number;
     groupName: string;
   };
-  players: [PlayerDTO];
+  players: PlayerDTO[];
   userPlayer: PlayerDTO;
 }

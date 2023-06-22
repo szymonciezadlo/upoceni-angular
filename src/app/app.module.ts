@@ -18,7 +18,8 @@ import { AuthService } from './services/auth.service';
 import { LoginComponent } from './login/login.component';
 import { NavigationHeaderComponent } from './navigation-header/navigation-header.component';
 import { GameService } from './services/game.service';
-import { AddPlayerComponent } from './game/add-player/add-player.component';
+import { AddPlayerComponent } from './add-player/add-player.component';
+import { PlayersListComponent } from './game/players-list/players-list.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddPlayerComponent } from './game/add-player/add-player.component';
     LoginComponent,
     NavigationHeaderComponent,
     AddPlayerComponent,
+    PlayersListComponent,
   ],
   imports: [
     BrowserModule,

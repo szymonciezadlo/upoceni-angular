@@ -1,0 +1,22 @@
+<div class="container">
+<div class="row offset-3 players-list">
+  <div class="col-md-3 col-sm-4" *ngFor="let player of players">
+      <div
+        class="card"
+        [ngStyle]="getStylePlayer(player.status)"
+      >
+        <p class="player-name">{{ player.playerName }}</p>
+        <button type="button" class="close deleteButton" aria-label="Close" (click)="deleteUser(player)">
+          <span aria-hidden="true" class="deleteMinus">&times;</span>
+        </button>
+        <!-- <button
+          type="button"
+          class="deleteButton btn btn-danger"
+          (click)="deleteUser(player)"
+        >
+          <p class="deleteMinus">-</p>
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>
