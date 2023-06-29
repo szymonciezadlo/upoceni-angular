@@ -19,3 +19,7 @@
     width: 70px;
     justify-self: right;
 }
+
+.list-group{
+    padding-top: 15px;
+}

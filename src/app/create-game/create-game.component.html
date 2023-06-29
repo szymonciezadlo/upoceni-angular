@@ -1,18 +1,36 @@
 <div class="createGameContainer">
   <form #gameForm="ngForm" (ngSubmit)="onSubmit(gameForm)">
     <div class="container">
-      <div class="form-group">
-        <label for="inputDate" class="col-form-label">Date</label>
-        <input
-          type="date"
-          class="form-control"
-          id="inputDate"
-          [(ngModel)]="date"
-          ngModel
-          required
-          name="date"
-        />
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="inputDate" class="col-form-label">Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="inputDate"
+              [(ngModel)]="date"
+              ngModel
+              required
+              name="date"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="inputTime" class="col-form-label">Time</label>
+            <input
+              type="time"
+              class="form-control"
+              id="inputTime"
+              ngModel
+              required
+              name="time"
+            />
+          </div>
+        </div>
       </div>
+
       <div class="form-group">
         <label for="place" class="col-form-label">Place</label>
         <input
@@ -82,14 +100,36 @@
           />
         </div>
       </div>
-      <ul class="list-group list-group-flush">
+      <app-add-group
+        *ngIf="!group"
+        (newGroupEmitter)="addGroupToGame($event)"
+      ></app-add-group>
+      <ul class="list-group list-group-flush" *ngIf="group || players.size > 0">
+        <li *ngIf="group" class="list-group-item list-group-item-success">
+          <div class="player-container">
+            <div class="player-username">{{ "Group: " + group.name }}</div>
+            <button
+              type="button"
+              class="player-delete btn btn-danger"
+              (click)="deleteGroup()"
+            >
+              -
+            </button>
+          </div>
+        </li>
         <li
           class="list-group-item list-group-item-primary"
-          *ngFor="let user of players"
+          *ngFor="let user of players | keyvalue"
         >
           <div class="player-container">
-            <div class="player-username">{{ user.username }}</div>
-            <button class="player-delete btn btn-danger">-</button>
+            <div class="player-username">{{ user.value.username }}</div>
+            <button
+              type="button"
+              class="player-delete btn btn-danger"
+              (click)="deletePlayer(user.key)"
+            >
+              -
+            </button>
           </div>
         </li>
       </ul>

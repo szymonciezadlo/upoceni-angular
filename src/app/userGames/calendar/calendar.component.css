@@ -10,12 +10,6 @@
     padding-bottom: 10px;
 }
 
-.calendar-container{
-}
-
-.card{
-}
-
 .list-group{
     padding: 0 10px;
     height: 100px;
@@ -37,4 +31,8 @@
 
 .card-body{
     padding: 0;
+}
+
+.calendar-column{
+    height: 100%;
 }

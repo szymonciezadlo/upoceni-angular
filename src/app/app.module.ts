@@ -20,6 +20,8 @@ import { NavigationHeaderComponent } from './navigation-header/navigation-header
 import { GameService } from './services/game.service';
 import { AddPlayerComponent } from './add-player/add-player.component';
 import { PlayersListComponent } from './game/players-list/players-list.component';
+import { AddGroupComponent } from './add-group/add-group.component';
+import { GroupComponent } from './group/group.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { PlayersListComponent } from './game/players-list/players-list.component
     NavigationHeaderComponent,
     AddPlayerComponent,
     PlayersListComponent,
+    AddGroupComponent,
   ],
   imports: [
     BrowserModule,

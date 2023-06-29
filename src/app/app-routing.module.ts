@@ -8,7 +8,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   { path: 'game/create/:day/:month/:year', component: CreateGameComponent },
   { path: 'game/:gameId', component: GameComponent },
-  { path: 'user/:id/games', component: GamesListComponent },
+  { path: 'user/:id/games/:year/:month', component: GamesListComponent },
   { path: 'login', component: LoginComponent },
 ];
 

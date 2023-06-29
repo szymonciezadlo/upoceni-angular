@@ -5,6 +5,6 @@ export interface CreateGameDTO {
   minPlayers: number;
   durationMin: number;
   cost: number;
-  groupId: number;
+  groupId?: number;
   players: number[];
 }

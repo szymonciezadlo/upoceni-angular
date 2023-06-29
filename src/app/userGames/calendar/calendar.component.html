@@ -31,23 +31,24 @@
 </table> -->
 <div class="container">
   <div class="row">
-    <div class="col-1"><-</div>
-    
-    <div class="col-10">
-    <div class="container calendar-container">
-      <div class="row rowTitle">
-        <div class="col daysTitle">Monday</div>
-        <div class="col daysTitle">Tuesday</div>
-        <div class="col daysTitle">Wednesday</div>
-        <div class="col daysTitle">Thursday</div>
-        <div class="col daysTitle">Friday</div>
-        <div class="col daysTitle">Saturday</div>
-        <div class="col daysTitle">Sunday</div>
-      </div>
+    <div type="button" (click)="changeMonth(-1)"  class="col calendar-column">
+      <p><-</p>
+    </div>
+    <div class="col-10 calendar-column">
+      <div class="container calendar-container">
+        <div class="row rowTitle">
+          <div class="col daysTitle">Monday</div>
+          <div class="col daysTitle">Tuesday</div>
+          <div class="col daysTitle">Wednesday</div>
+          <div class="col daysTitle">Thursday</div>
+          <div class="col daysTitle">Friday</div>
+          <div class="col daysTitle">Saturday</div>
+          <div class="col daysTitle">Sunday</div>
+        </div>
 
         <div class="row" *ngFor="let week of getWeeks()">
           <div
-            class="col-lg col-md-12"
+            class="col-lg col-md-12 card-col"
             *ngFor="let day of [0, 1, 2, 3, 4, 5, 6]"
           >
             <div class="card">
@@ -57,7 +58,7 @@
                 [routerLink]="[
                   '/game/create',
                   getDateInWeek(week, day),
-                  chosenDate.getMonth(),
+                  chosenDate.getMonth()+1,
                   chosenDate.getFullYear()
                 ]"
               >
@@ -82,8 +83,9 @@
           </div>
         </div>
       </div>
-
-      <div class="col-1">-></div>
+    </div>
+    <div type="button" (click)="changeMonth(1)" class="col calendar-column">
+      <p>-></p>
     </div>
   </div>
 </div>

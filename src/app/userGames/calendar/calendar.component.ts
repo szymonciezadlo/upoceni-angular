@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CalendarGameDTO } from 'src/app/models/calendar-gameDTO.model';
 import { Game } from 'src/app/models/game.model';
 import { CalendarGamesService } from 'src/app/services/calendar-games.service';
 
@@ -12,6 +11,7 @@ import { CalendarGamesService } from 'src/app/services/calendar-games.service';
 })
 export class CalendarComponent implements OnInit, OnDestroy {
   gamesSub!: Subscription;
+  dataSub!: Subscription;
   games!: Game[];
   weekday = [
     'Sunday',
@@ -28,20 +28,25 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   constructor(
     private userGamesService: CalendarGamesService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.gamesSub = this.userGamesService
-      .getGames(2023, 5)
-      .subscribe((games) => {
-        this.games = games;
-        this.fillDays();
-      });
+    this.dataSub = this.route.params.subscribe((v) => {
+      this.chosenDate = new Date(v['year'], v['month'] - 1);
+      this.gamesSub = this.userGamesService
+        .getGames(v['year'], v['month'])
+        .subscribe((games) => {
+          this.games = games;
+          this.fillDays();
+        });
+    });
   }
 
   ngOnDestroy(): void {
     this.gamesSub.unsubscribe();
+    this.dataSub.unsubscribe();
   }
 
   parseDate(date: Date) {
@@ -91,9 +96,10 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.daysNumbers = daysNumbers;
     this.gamesByDays.clear();
     this.games.forEach((game) => {
-      let gameArr = this.gamesByDays.get(game.date.getDate());
+      let day = game.date.getDate();
+      let gameArr = this.gamesByDays.get(day);
       if (gameArr === undefined) {
-        this.gamesByDays.set(game.date.getDate(), [game]);
+        this.gamesByDays.set(day, [game]);
       } else {
         gameArr.push(game);
       }
@@ -117,11 +123,10 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   getGamesIfExist(week: number, day: number) {
-    let games = this.gamesByDays.get(day + 7 * week);
+    let games = this.gamesByDays.get(day+1 + 7 * week);
     if (
       games === undefined ||
-      games.length === 0 ||
-      games[0].date.getDate() !== day + 7 * week
+      games.length === 0
     ) {
       return;
     }
@@ -142,7 +147,12 @@ export class CalendarComponent implements OnInit, OnDestroy {
       })
       .sort(dateComparator());
 
-    function dateComparator(): ((a: { id: number; time: Date; description: string; status: string; }, b: { id: number; time: Date; description: string; status: string; }) => number) | undefined {
+    function dateComparator():
+      | ((
+          a: { id: number; time: Date; description: string; status: string },
+          b: { id: number; time: Date; description: string; status: string }
+        ) => number)
+      | undefined {
       return (a, b) => {
         if (a.time.getTime() > b.time.getTime()) {
           return 1;
@@ -170,5 +180,13 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   goToGame(id: number) {
     this.router.navigate(['game', id]);
+  }
+
+  changeMonth(monthDirection: number) {
+    this.router.navigate([
+      '/user/17/games',
+      this.chosenDate.getFullYear(),
+      this.chosenDate.getMonth() + monthDirection + 1,
+    ]);
   }
 }

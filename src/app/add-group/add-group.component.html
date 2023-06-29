@@ -1,0 +1,44 @@
+<div class="row container">
+    <div class="col">
+      <form #groupForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <label for="group">Group</label>
+          <div class="form-group col-10">
+            <input
+              type="text"
+              id="group"
+              class="form-control"
+              (blur)="changeIsTyping(false)"
+              (focus)="changeIsTyping(true)"
+              (change)="onInputChange(inputGroup.value)"
+              autocomplete="off"
+              name="group"
+              [value]="chosenGroup?.name"
+              #inputGroup
+            />
+          </div>
+          <button
+            type="submit"
+            class="col-2 add-button btn btn-success"
+            [disabled]="groupForm.invalid"
+          >
+            Add
+          </button>
+        </div>
+        <div class="suggest-container" *ngIf="isTyping">
+          <div class="list-group" *ngFor="let group of groups">
+            <div class="row">
+              <button
+                type="button"
+                class="col suggest-button list-group-item list-group-item-action"
+                (click)="chooseGroup(group)"
+              >
+                {{ group.name }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

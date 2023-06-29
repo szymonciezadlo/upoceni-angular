@@ -5,6 +5,7 @@ import { GameService } from '../services/game.service';
 import { CreateGameDTO } from '../models/create-gameDTO.model';
 import { PlayerDTO } from '../models/playerDTO.model';
 import { User } from '../models/user.model';
+import { GroupDTO } from '../models/groupDTO.model';
 
 @Component({
   selector: 'app-create-game',
@@ -13,7 +14,8 @@ import { User } from '../models/user.model';
 })
 export class CreateGameComponent {
   date: string;
-  players: Set<User> = new Set();
+  players: Map<number,User> = new Map();
+  group?: GroupDTO;
 
   constructor(route: ActivatedRoute, private router: Router, private gameService: GameService) {
     let params = route.snapshot.params;
@@ -25,20 +27,19 @@ export class CreateGameComponent {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
     if (!form.form.valid) {
       return;
     }
     let formValues = form.form.value;
     let newGame: CreateGameDTO = {
-      date: new Date(formValues.date),
+      date: new Date(formValues.date + " " + formValues.time),
       place: formValues.place,
       maxPlayers: formValues.maxPlayers,
       minPlayers: formValues.minPlayers,
       durationMin: formValues.durationMin,
       cost: formValues.cost,
-      groupId: 5,
-      players: Array.from(this.players).map(user => user.id),
+      groupId: this.group?.id,
+      players: Array.from(this.players).map((user) => user[0]),
     };
 
     this.gameService.createGame(newGame).subscribe(game => { 
@@ -47,8 +48,24 @@ export class CreateGameComponent {
   }
 
   addUserToPlayers(user: User) {
-    if (!this.players.has(user)) {
-      this.players.add(user);
+    if (!this.players.has(user.id)) {
+      this.players.set(user.id, user);
     }
+  }
+
+  addGroupToGame(group: GroupDTO) {
+    console.log(group);
+    this.group = group;
+    group.members.forEach(member => {
+      this.addUserToPlayers(member);
+    });
+  }
+
+  deleteGroup() {
+    this.group = undefined;
+  }
+
+  deletePlayer(playerId: number) {
+    this.players.delete(playerId)
   }
 }
