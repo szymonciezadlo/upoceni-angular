@@ -1,0 +1,31 @@
+.game {
+  height: 60px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.plus-container {
+    padding-top: 15px;
+  padding-right: 100px;
+  padding-left: 100px;
+}
+
+.list-container {
+  max-height: 700px;
+  overflow-y: scroll;
+}
+
+.date {
+  margin: 0px;
+}
+
+.list-container::-webkit-scrollbar {
+  display: none;
+}
+
+.games-header {
+  text-align: center;
+  align-items: center;
+  padding-bottom: 15px;
+}

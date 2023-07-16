@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row" *ngIf="groupInfo">
+    <div class="col">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>{{ groupInfo.groupName }}</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <app-players-list
+              [getStylePlayer]="userCardStyle"
+              (deleteUserEmitter)="deleteUser($event)"
+              [players]="mapToPlayers()"
+            ></app-players-list>
+            <app-add-player
+              (newUserEmitter)="addUserToGroup($event)"
+              [groupId]="groupInfo.id"
+            ></app-add-player>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p>{{ groupInfo.rules }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-danger" (click)="deleteGroup(groupInfo.id)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <app-group-games [games]="groupInfo.games" [group]="getGroupDTO()"></app-group-games>
+    </div>
+  </div>
+</div>

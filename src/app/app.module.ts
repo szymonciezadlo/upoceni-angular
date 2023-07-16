@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GameComponent } from './game/game.component';
@@ -22,6 +21,9 @@ import { AddPlayerComponent } from './add-player/add-player.component';
 import { PlayersListComponent } from './game/players-list/players-list.component';
 import { AddGroupComponent } from './add-group/add-group.component';
 import { GroupComponent } from './group/group.component';
+import { GroupInfoComponent } from './group/group-info/group-info.component';
+import { GroupGamesComponent } from './group/group-info/group-games/group-games.component';
+import { GroupCreateComponent } from './group/group-create/group-create.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,10 @@ import { GroupComponent } from './group/group.component';
     AddPlayerComponent,
     PlayersListComponent,
     AddGroupComponent,
+    GroupComponent,
+    GroupInfoComponent,
+    GroupGamesComponent,
+    GroupCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,9 +50,9 @@ import { GroupComponent } from './group/group.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [PlayerService, AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

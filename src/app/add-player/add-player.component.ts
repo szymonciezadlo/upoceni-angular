@@ -5,6 +5,7 @@ import { timeout } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { GameService } from 'src/app/services/game.service';
 import { PlayerDTO } from '../models/playerDTO.model';
+import { GroupService } from '../services/group.service';
 
 @Component({
   selector: 'app-add-player',
@@ -15,13 +16,15 @@ export class AddPlayerComponent implements OnInit {
   users: User []= [  ] 
   chosenUser?: User;
   isTyping: boolean = false;
+  @Input() groupId?: number;
   @Input() gameId?: number;
   @Output() newUserEmitter = new EventEmitter<User>();
 
   constructor(private gameService: GameService) { }
 
   ngOnInit() {
-    this.gameService.fetchSuggestedUsers('', this.gameId).subscribe(users => this.users = users);
+    this.fetchUsersFromGroup('');
+    this.fetchGroupFromGame('');
    }
   
   onSubmit(usernameForm: NgForm) {
@@ -32,7 +35,20 @@ export class AddPlayerComponent implements OnInit {
   }
 
   onInputChange(username: string) {
-    this.gameService.fetchSuggestedUsers(username, this.gameId).subscribe(users => this.users = users);
+    this.fetchUsersFromGroup(username);
+    this.fetchGroupFromGame(username);
+  }
+
+  private fetchGroupFromGame(username: string) {
+    if (!this.groupId) {
+      this.gameService.fetchSuggestedUsers(username, this.gameId).subscribe(users => this.users = users);
+    }
+  }
+
+  private fetchUsersFromGroup(username: string) {
+    if (this.groupId) {
+      this.gameService.fetchSuggestedUsersFromGroup(username, this.groupId).subscribe(users => this.users = users);
+    }
   }
 
   changeIsTyping(status: boolean) {

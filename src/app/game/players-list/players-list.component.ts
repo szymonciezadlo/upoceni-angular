@@ -13,7 +13,6 @@ export class PlayersListComponent {
   @Input() getStylePlayer!: (status: string) => {};
   // @Input() deleteUser!: (player: PlayerDTO) => void ;
   @Output() deleteUserEmitter = new EventEmitter<PlayerDTO>();
-
   constructor() { }
 
   deleteUser(user: PlayerDTO) {

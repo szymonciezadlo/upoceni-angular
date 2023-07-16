@@ -6,6 +6,7 @@ import { CreateGameDTO } from '../models/create-gameDTO.model';
 import { PlayerDTO } from '../models/playerDTO.model';
 import { User } from '../models/user.model';
 import { GroupDTO } from '../models/groupDTO.model';
+import { GroupService } from '../services/group.service';
 
 @Component({
   selector: 'app-create-game',
@@ -17,13 +18,12 @@ export class CreateGameComponent {
   players: Map<number,User> = new Map();
   group?: GroupDTO;
 
-  constructor(route: ActivatedRoute, private router: Router, private gameService: GameService) {
+  constructor(route: ActivatedRoute, private router: Router, private gameService: GameService, private groupService: GroupService) {
     let params = route.snapshot.params;
-    // this.date = params['year'] + '-' + params['month'] + '-' + params['day'];
+    this.group = groupService.getChosenGroup();
     this.date = new Date(params['year'], +params['month']-1, +params['day']+1)
       .toISOString()
       .slice(0, 10);
-    // console.log(new Date(params['year'], params['month']-1, params['day']));
   }
 
   onSubmit(form: NgForm) {
@@ -54,7 +54,6 @@ export class CreateGameComponent {
   }
 
   addGroupToGame(group: GroupDTO) {
-    console.log(group);
     this.group = group;
     group.members.forEach(member => {
       this.addUserToPlayers(member);

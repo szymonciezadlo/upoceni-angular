@@ -49,6 +49,18 @@ export class GameService {
       .pipe(catchError(this.handleError));
   }
 
+  fetchSuggestedUsersFromGroup(username: string, groupId: number) {
+    let params = new HttpParams().append('username', username);
+    params = params.append('groupId', groupId);
+    
+    return this.http
+      .get<User[]>('http://localhost:8080/user/suggested/group', {
+        params: params,
+        withCredentials: true,
+      })
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(errorRes: HttpErrorResponse) {
     return throwError(
       () => new Error('Error from GameService', errorRes.error)
