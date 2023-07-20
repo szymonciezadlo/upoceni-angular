@@ -77,13 +77,12 @@ export class CalendarComponent implements OnInit, OnDestroy {
       this.chosenDate.getMonth(),
       0
     ).getDate();
-
     let daysNumbers = Array.prototype.concat(
       Array(this.parseToMondaySundayWeek(firstDay))
         .fill(1)
         .map(
           (x, i) =>
-            numberOfDaysMonthBefore - this.parseToMondaySundayWeek(firstDay) + i
+            numberOfDaysMonthBefore - this.parseToMondaySundayWeek(firstDay) + i +1
         ),
       Array(numberOfDays)
         .fill(1)
@@ -184,7 +183,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   changeMonth(monthDirection: number) {
     this.router.navigate([
-      '/user/17/games',
+      '/user/games',
       this.chosenDate.getFullYear(),
       this.chosenDate.getMonth() + monthDirection + 1,
     ]);

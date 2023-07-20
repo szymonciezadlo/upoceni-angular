@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-8 text-center">
     <h1 class="text-uppercase">{{game?.groupDTO?.groupName}}</h1>
-    <h3>{{game?.date}}</h3>
+    <h3>{{game?.date | date: 'fullDate'}}  {{game?.date | date: 'shortTime'}}</h3>
     <h6>Liczba uczestników: {{game?.approvedPlayers}}</h6>
     <h6>Lokalizacja: {{game?.place}}</h6>
   </div>

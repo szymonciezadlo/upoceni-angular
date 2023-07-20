@@ -19,7 +19,6 @@ export class UserPlayerComponent implements OnInit {
 
   constructor(
     private gameService: GameService,
-    private playerService: PlayerService
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +26,6 @@ export class UserPlayerComponent implements OnInit {
       (player) => (this.userPlayer = player)
     );
     this.gameSub = this.gameService.gameSubject.subscribe((gameDTO) => {
-      console.log('Subskrypcja gameDTO', gameDTO);
       this.userPlayer = gameDTO.userPlayer;
       this.game = gameDTO;
     });

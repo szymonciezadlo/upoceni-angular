@@ -1,3 +1,8 @@
 .navbar-brand{
     padding-right: 20px;
 }
+
+.navbar{
+    padding-bottom: 15px;
+    border-bottom: 1px solid #0000002e;
+}

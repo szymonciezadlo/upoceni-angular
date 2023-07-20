@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation-header.component.css']
 })
 export class NavigationHeaderComponent {
-
+  today: Date = new Date();
 }

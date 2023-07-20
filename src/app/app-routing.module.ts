@@ -12,7 +12,7 @@ import { GroupCreateComponent } from './group/group-create/group-create.componen
 const routes: Routes = [
   { path: 'game/create/:day/:month/:year', component: CreateGameComponent },
   { path: 'game/:gameId', component: GameComponent },
-  { path: 'user/:id/games/:year/:month', component: GamesListComponent },
+  { path: 'user/games/:year/:month', component: GamesListComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'group',

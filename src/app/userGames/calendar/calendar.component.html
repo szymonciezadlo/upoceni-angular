@@ -1,41 +1,11 @@
-<!-- <table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">Monday</th>
-      <th scope="col">Tuesday</th>
-      <th scope="col">Wednesday</th>
-      <th scope="col">Thursday</th>
-      <th scope="col">Friday</th>
-      <th scope="col">Saturday</th>
-      <th scope="col">Sunday</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let week of getWeeks()">
-      <td *ngFor="let day of [0, 1, 2, 3, 4, 5, 6]">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-title">
-              {{ getDateInWeek(week, day) }}
-            </div>
-            <div class="card-text">
-              <ul class="list-group">
-                <li class="list-group-item">{{getGameIfExist(week, day)}}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table> -->
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div type="button" (click)="changeMonth(-1)"  class="col calendar-column">
-      <p><-</p>
+    <div class="col-1 arrow arrow-left" type="button" (click)="changeMonth(-1)">
+        <p class=""><-</p>
     </div>
-    <div class="col-10 calendar-column">
-      <div class="container calendar-container">
+
+    <div class="col-10">
+      <div class="container-fluid calendar-container">
         <div class="row rowTitle">
           <div class="col daysTitle">Monday</div>
           <div class="col daysTitle">Tuesday</div>
@@ -58,7 +28,7 @@
                 [routerLink]="[
                   '/game/create',
                   getDateInWeek(week, day),
-                  chosenDate.getMonth()+1,
+                  chosenDate.getMonth() + 1,
                   chosenDate.getFullYear()
                 ]"
               >
@@ -84,8 +54,8 @@
         </div>
       </div>
     </div>
-    <div type="button" (click)="changeMonth(1)" class="col calendar-column">
-      <p>-></p>
+    <div class="col-1 arrow arrow-right"  type="button" (click)="changeMonth(1)">
+        <p class="">-></p>
     </div>
   </div>
 </div>
