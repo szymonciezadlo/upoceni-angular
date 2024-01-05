@@ -1,9 +1,7 @@
 <div class="row">
   <div class="col">
-    <div
-      class="card user-card justify-content-center align-items-center"
-      [ngStyle]="getStylePlayer(userPlayer?.status)"
-    >
+    <div class="card user-card justify-content-center align-items-center"
+      [ngStyle]="getStylePlayer(userPlayer?.status)">
       <h2 class="card-text">
         {{ userPlayer?.playerName }}
       </h2>
@@ -13,20 +11,16 @@
 
 <div class="row buttons">
   <div class="col-2">
-    <button
-      type="button"
-      class="btn btn-success"
-      (click)="onDecisionClick(true)"
-    >
+    <span *ngIf="!checkIfIsSlotForPlayer()" class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top"
+      title="There is no free slots in the game">
+      <button class="btn btn-success" style="pointer-events: none;" type="button" disabled>APPROVE</button>
+    </span>
+    <button *ngIf="checkIfIsSlotForPlayer()" type="button" class="btn btn-success" (click)="onDecisionClick(true)">
       APPROVE
     </button>
   </div>
   <div class="col-2">
-    <button
-      type="button"
-      class="btn btn-danger"
-      (click)="onDecisionClick(false)"
-    >
+    <button type="button" class="btn btn-danger" (click)="onDecisionClick(false)">
       DECLINE
     </button>
   </div>

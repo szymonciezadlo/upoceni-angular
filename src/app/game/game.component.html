@@ -1,9 +1,9 @@
 <div class="game-element">
   <div class="container">
     <app-game-info></app-game-info>
-    <app-players-list [getStylePlayer]="getStylePlayer" (deleteUserEmitter)="deleteUser($event)" [players]="players"></app-players-list>
+    <app-players-list [getStylePlayer]="getStylePlayer" (deleteUserEmitter)="deleteUser($event)" [players]="players" [canDeletePlayers]="canDeletePlayers"></app-players-list>
 
-    <app-add-player (newUserEmitter)="addUserToGame($event)" [gameId]="gameId"></app-add-player>
+    <app-add-player *ngIf="canAddPlayers" (newUserEmitter)="addUserToGame($event)" [gameId]="gameId"></app-add-player>
   
     <app-user-player [getStylePlayer]="getStylePlayer"></app-user-player>
   </div>

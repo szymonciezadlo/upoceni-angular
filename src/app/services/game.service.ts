@@ -79,6 +79,7 @@ export class GameService {
           withCredentials: true,
         }
       )
+      .pipe(catchError(this.handleError))
       .subscribe((player) => {
         this.userPlayer.next(player);
       });

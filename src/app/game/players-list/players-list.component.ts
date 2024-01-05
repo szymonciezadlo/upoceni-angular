@@ -9,6 +9,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class PlayersListComponent {
   @Input() players: PlayerDTO[] = [];
+  @Input() canDeletePlayers: boolean = false;
 
   @Input() getStylePlayer!: (status: string) => {};
   // @Input() deleteUser!: (player: PlayerDTO) => void ;

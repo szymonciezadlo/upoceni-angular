@@ -100,6 +100,18 @@
           />
         </div>
       </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" ngModel name="allCanAdd" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+          Players can add other players
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" ngModel name="allCanDelete" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+          Players can delete other players
+        </label>
+      </div>
       <app-add-group
         *ngIf="!group"
         (newGroupEmitter)="addGroupToGame($event)"

@@ -17,4 +17,7 @@ export interface GameDTO {
   };
   players: PlayerDTO[];
   userPlayer: PlayerDTO;
+  authorId: number;
+  allCanAdd: boolean;
+  allCanDelete: boolean;
 }

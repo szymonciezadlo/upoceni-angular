@@ -12,19 +12,17 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(authForm: NgForm) {
-    this.authService
-      .login(authForm.form.value.username, authForm.form.value.password)
-      .subscribe((user) => {
-        console.log(user);
-        if (user) {
-          this.router.navigate(['user/',user.id,'games'])
-        } else {
-
-        }
-      });
-    this.authService.test();
     if (!authForm.valid) {
       return;
     }
+    this.authService
+      .login(authForm.form.value.username, authForm.form.value.password)
+      .subscribe((user) => {
+        if (user) {
+          let date = new Date()
+          this.router.navigate(['user/games/' + date.getFullYear() +'/' + date.getMonth()])
+        }
+      });
+
   }
 }

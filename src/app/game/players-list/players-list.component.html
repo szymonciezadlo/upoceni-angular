@@ -6,7 +6,7 @@
         [ngStyle]="getStylePlayer(player.status)"
       >
         <p class="player-name">{{ player.playerName }}</p>
-        <button type="button" class="close deleteButton" aria-label="Close" (click)="deleteUser(player)">
+        <button *ngIf="canDeletePlayers" type="button" class="close deleteButton" aria-label="Close" (click)="deleteUser(player)">
           <span aria-hidden="true" class="deleteMinus">&times;</span>
         </button>
         <!-- <button

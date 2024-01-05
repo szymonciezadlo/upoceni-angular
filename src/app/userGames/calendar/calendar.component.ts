@@ -82,7 +82,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
         .fill(1)
         .map(
           (x, i) =>
-            numberOfDaysMonthBefore - this.parseToMondaySundayWeek(firstDay) + i +1
+            numberOfDaysMonthBefore - this.parseToMondaySundayWeek(firstDay) + i + 1
         ),
       Array(numberOfDays)
         .fill(1)
@@ -95,7 +95,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.daysNumbers = daysNumbers;
     this.gamesByDays.clear();
     this.games.forEach((game) => {
-      let day = game.date.getDate();
+      let day = game.date.getDate() + this.parseToMondaySundayWeek(firstDay);
       let gameArr = this.gamesByDays.get(day);
       if (gameArr === undefined) {
         this.gamesByDays.set(day, [game]);
@@ -188,4 +188,5 @@ export class CalendarComponent implements OnInit, OnDestroy {
       this.chosenDate.getMonth() + monthDirection + 1,
     ]);
   }
+
 }

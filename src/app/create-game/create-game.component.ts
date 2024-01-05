@@ -40,6 +40,8 @@ export class CreateGameComponent {
       cost: formValues.cost,
       groupId: this.group?.id,
       players: Array.from(this.players).map((user) => user[0]),
+      allCanAdd: formValues.allCanAdd,
+      allCanDelete: formValues.allCanDelete
     };
 
     this.gameService.createGame(newGame).subscribe(game => { 

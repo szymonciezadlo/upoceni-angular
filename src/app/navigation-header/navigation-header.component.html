@@ -7,7 +7,8 @@
       <a routerLink="/group" class="navbar-brand">Your Groups</a>
     </div>
     <div class="navbar-nav navbar-right">
-      <a routerLink="/login" class="navbar-brand">Login</a>
+      <a *ngIf="!isLogged()" routerLink="/login" class="navbar-brand">Login</a>
+      <a *ngIf="isLogged()" (click)="deleteCookie()" class="navbar-brand" type="button">Logout</a>
     </div>
   </div>
 </nav>

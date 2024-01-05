@@ -44,4 +44,11 @@ export class UserPlayerComponent implements OnInit {
       );
     }
   }
+
+  checkIfIsSlotForPlayer(){
+    if (this.game){
+      return this.game.approvedPlayers < this.game.maxPlayers;
+    }
+    return false;
+  }
 }

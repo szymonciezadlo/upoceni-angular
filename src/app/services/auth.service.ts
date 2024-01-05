@@ -28,7 +28,7 @@ export class AuthService {
           username: username,
           password: password,
         },
-        { observe: 'response' }
+        { observe: 'response', withCredentials: true }
       )
       .pipe(
         catchError(this.handleError),
@@ -57,5 +57,13 @@ export class AuthService {
 
   getUserId() {
     return this.user.getValue()?.id;
+  }
+
+  getUserIdFromCookie(){
+    return +document.cookie.split('=')[1].split('&')[0];
+  }
+
+  isAuthenticated(){
+    return document.cookie.split("=")[0]==='auth_by_cookie'
   }
 }

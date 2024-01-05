@@ -7,4 +7,6 @@ export interface CreateGameDTO {
   cost: number;
   groupId?: number;
   players: number[];
+  allCanAdd: boolean;
+  allCanDelete: boolean;
 }
